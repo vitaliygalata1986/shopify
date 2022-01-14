@@ -1,11 +1,11 @@
 {% for product in collections.frontpage.products limit:4 %}
   <div>
-    <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
-    {{ product.price | money }}
-    {% unless product.available %}<br><strong>sold out</strong>{% endunless %}
-    <a href="{{ product.url | within: collection }}">
-      <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
-    </a>
+    {% comment %}<a href="{{ product.url | within: collection }}">{{ product.title }}</a>{% endcomment %}
+    {% comment %}{{ product.price | money }}{% endcomment %}
+    {% comment %}{% unless product.available %}<br><strong>sold out</strong>{% endunless %}{% endcomment %}
+    {% comment %}<a href="{{ product.url | within: collection }}">{% endcomment %}
+      {% comment %}<img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">{% endcomment %}
+    {% comment %}</a>{% endcomment %}
   </div>
 {% endfor %}
 
