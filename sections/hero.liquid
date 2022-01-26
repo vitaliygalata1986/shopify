@@ -1,6 +1,6 @@
 <section class="inner-hero-section">
     {% if section.settings.image != blanck %}
-        <img src="{{ section.settings.image | image_url: width: 420, height:420 }}" alt="">
+        <img src="{{ section.settings.image | image_url: width: 420, height:420 }}" alt="{{ section.settings.image.alt }}">
     {% else %}
         {% capture current %} {% cycle 1,2 %}{% endcapture %}
         {{ 'lifestyle-1' | placeholder_svg_tag }}

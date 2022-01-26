@@ -1,0 +1,20 @@
+{
+  "general": {
+    "404": {
+      "title": "French title",
+      "subtext_html": "French subtext"
+    },
+    "Cart": {
+      "title": "Cart Franch"
+    },
+    "Blog": {
+      "title": "News French"
+    },
+    "Layout": {
+      "login_text": "Login in French",
+      "logout_text": "Logout in French",
+      "register_text": "Register in French",
+      "account_text": "Account in French"
+    }
+  }
+}
