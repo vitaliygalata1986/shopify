@@ -5,11 +5,13 @@
                 <h1>{{ section.settings.title }}</h1>
                 {{ section.settings.description }}
                 <a href="{{ section.settings.button_link }}" class="btn btn-secondary mb-3">{{ section.settings.button_label }}</a>
-                {% if section.settings.image != blanck %}
-                    <img class="d-block" src="{{ section.settings.image | image_url: width: 420, height:420 }}" alt="{{ section.settings.image.alt }}">
-                {% else %}
-                    {% capture current %} {% cycle 1,2 %}{% endcapture %}
-                    {{ 'lifestyle-1' | placeholder_svg_tag }}
+                {% if section.settings.show_image%}
+                    {% if section.settings.image != blanck %}
+                        <img class="d-block" src="{{ section.settings.image | image_url: width: 420, height:420 }}" alt="{{ section.settings.image.alt }}">
+                    {% else %}
+                        {% capture current %} {% cycle 1,2 %}{% endcapture %}
+                        {{ 'lifestyle-1' | placeholder_svg_tag }}
+                    {% endif %}
                 {% endif %}
 
             </div>
@@ -77,6 +79,12 @@
             "type": "url",
             "id": "button_link",
             "label": "Heading Button Link"
+        },
+        {
+            "type": "checkbox",
+            "id": "show_image",
+            "label": "Show images",
+            "default": true
         }
     ],
     "blocks": [

@@ -3,6 +3,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-12">
+            {% comment %}<img class="img-fluid" src="{{product.featured_media | img_url: 'large' }}" alt="{{product.alt}}" id="MainImage">{% endcomment %}
             <img class="img-fluid" src="{{product_image | img_url: 'large'}}" alt="{{product_image.alt}}" id="ProductMainImage">
             {% for image in product.images %}
                 <img src="{{image.src | img_url: 'medium'}}" alt="{{image.alt}}">
@@ -10,7 +11,8 @@
         </div>
         <div class="col-md-6 col-12">
             <h1>{{product.title}}</h1>
-            <p>{{current_product.price | money_with_currency}}</p>
+            <p>Regular price: {{current_product.price | money_with_currency}}</p>
+            <p>Compare: {{current_product.compare_at_price | money_with_currency}}</p>
             {% form 'product', product, class:"product-form", id:"AddToCartForm" %}
                 <div class="mb-3">
                     <select name="id" id="productSelect" class="form-select">
@@ -36,6 +38,9 @@
                 {% endif %}
             {% endform %}
         </div>
+        <p>{{product.content}}</p>
+
+
     </div>
 </div>
 
