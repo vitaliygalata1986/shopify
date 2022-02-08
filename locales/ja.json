@@ -1,0 +1,20 @@
+{
+  "general": {
+    "404": {
+      "title": "Japan title",
+      "subtext_html": "Japan subtext"
+    },
+    "Cart": {
+      "title": "Japan Dutch"
+    },
+    "Blog": {
+      "title": "Japan Dutch"
+    },
+    "Layout": {
+      "login_text": "Login in Japan",
+      "logout_text": "Logout in Japan",
+      "register_text": "Register in Japan",
+      "account_text": "Account in Japan"
+    }
+  }
+}

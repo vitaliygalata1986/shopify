@@ -1,0 +1,20 @@
+{
+  "general": {
+    "404": {
+      "title": "Dutch title",
+      "subtext_html": "Dutch subtext"
+    },
+    "Cart": {
+      "title": "Cart Dutch"
+    },
+    "Blog": {
+      "title": "News Dutch"
+    },
+    "Layout": {
+      "login_text": "Login in Dutch",
+      "logout_text": "Logout in Dutch",
+      "register_text": "Register in Dutch",
+      "account_text": "Account in Dutch"
+    }
+  }
+}

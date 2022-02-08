@@ -40,3 +40,14 @@ if(document.getElementById('forgotPassword')!=null){
        // }
     })
 }
+
+var localeItems = document.querySelectorAll("#localeItem")
+if(localeItems.length > 0){
+    localeItems.forEach(item =>{
+        console.log(item)
+        item.addEventListener("click", event=>{
+            document.getElementById("localCode").value=item.getAttribute("lang")
+            document.getElementById("localization_form_tag").submit()
+        })
+    })
+}
