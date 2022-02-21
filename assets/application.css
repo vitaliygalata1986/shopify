@@ -85,3 +85,7 @@ html,body {
 .featured-collection-section .card{
   z-index: -1;
 }
+
+.featured-collection-section .my-featured .card{
+  z-index: 1;
+}

@@ -56,7 +56,11 @@ var carousel = new bootstrap.Carousel(myCarousel, {
    interval: {{ speed }}*1000
 })
 
-var productModal = new bootstrap.Modal(document.getElementById('productInfoModal'),{})
+var productModal
+if(document.getElementById('productInfoModal') !=null){
+    productModal = new bootstrap.Modal(document.getElementById('productInfoModal'),{})
+}
+
 var productInfoAnchor = document.querySelectorAll("#productInfoAnchor")
 if(productInfoAnchor.length>0){
     productInfoAnchor.forEach((item)=>{
@@ -66,18 +70,61 @@ if(productInfoAnchor.length>0){
             fetch(url)
                 .then((resp) => resp.json())
                 .then(function (data) {
-                    console.log(data)
+                    //console.log(data)
                     document.getElementById('productInfoImg').src = data.images[0]
                     document.getElementById('productInfoTitle').innerHTML = data.title
                     document.getElementById('productInfoPrice').innerHTML = item.getAttribute('product-price')
                     document.getElementById('productInfoDescription').innerHTML = data.description
-                    document.getElementById('productVariantPrice').innerHTML = data.variants[0].price
-
-                    data.variants.forEach(variant=>{
-                        document.getElementById('productVariantSelect').innerHTML += `<option>${variant.title}</option>`
+                    var variants = data.variants;
+                    var variantSelect = document.getElementById('modalItemID')
+                    variantSelect.innerHTML='' // при каждом новом открытии модального окна - мы будем очищать доп. варианты опции определенного товара
+                    variants.forEach(function(variant,index){
+                        console.log(variant)
+                        variantSelect.options[variantSelect.options.length] = new Option(variant.option1, variant.id);
+                        document.getElementById('sku').innerHTML += `<div>${variant.sku}</div>`
                     })
                     productModal.show()
                 });
         })
     })
+}
+
+var modalAddToCartForm = document.querySelector('#addToCartForm');
+if(modalAddToCartForm !=null){
+    modalAddToCartForm.addEventListener("submit", function (e) {
+        e.preventDefault()
+        let formData = {
+            'items': [{
+                'id': document.getElementById("modalItemID").value,
+                'quantity':document.getElementById("modalItemQuantity").value
+            }]
+        };
+        fetch('/cart/add.js',{
+            method:'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+            .then((resp) => resp.json())
+
+            .then((data) => update_cart())
+
+            .catch((err)=>{
+                console.error('Error: ' + err)
+            })
+    })
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    update_cart()
+})
+
+function update_cart(){
+    fetch('/cart.js')
+       .then((responce)=>responce.json())
+       // .then((data)=>console.log(data))
+       .then((data)=>document.getElementById('numberOfCartItem').innerText=data.item_count)
+       //.then((data)=>document.getElementById('numberOfCartItem').innerText=data.items.length)
+       .catch((err)=>console.error(err))
 }
