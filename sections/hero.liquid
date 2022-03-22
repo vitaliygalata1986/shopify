@@ -2,8 +2,9 @@
     {% if section.settings.image != blanck %}
         <img src="{{ section.settings.image | image_url: width: 420, height:420 }}" alt="{{ section.settings.image.alt }}">
     {% else %}
-        {% capture current %} {% cycle 1,2 %}{% endcapture %}
-        {{ 'lifestyle-1' | placeholder_svg_tag }}
+        {% comment %}{% capture current %} {% cycle 1,2 %}{% endcapture %}{% endcomment %}
+        {% assign placeholder = 'lifestyle-2'  %}
+        {{ placeholder | placeholder_svg_tag: 'placeholder-svg' }}
     {% endif %}
     <div class="container py-5">
         <div class="row">
@@ -18,44 +19,44 @@
 
 
 {% schema %}
-{
-    "name": "Hero",
-    "class": "hero-section",
-    "settings":[
-        {
-            "type": "image_picker",
-            "id": "image",
-            "label": "Heading Background Title"
-        },
-        {
-        "type": "text",
-        "id": "title",
-        "default": "Example Heading",
-        "label": "Heading Title"
-        },
-        {
-            "type": "richtext",
-            "id": "description",
-            "default": "<p>Example Paragraph</p>",
-            "label": "Heading Description"
-        },
-        {
-            "type": "text",
-            "id": "button_label",
-            "default": "Button",
-            "label": "Heading Button Label"
+    {
+        "name": "Hero",
+        "class": "hero-section",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Heading Background Title"
             },
-        {
-            "type": "url",
-            "id": "button_link",
-            "label": "Heading Button Link"
-        }
-    ],
-    "presets": [
-        {
-            "category": "Hero",
-            "name": "Simple Hero"
-        }
-    ]
+            {
+                "type": "text",
+                "id": "title",
+                "default": "Example Heading",
+                "label": "Heading Title"
+            },
+            {
+                "type": "richtext",
+                "id": "description",
+                "default": "<p>Example Paragraph</p>",
+                "label": "Heading Description"
+            },
+            {
+                "type": "text",
+                "id": "button_label",
+                "default": "Button",
+                "label": "Heading Button Label"
+            },
+            {
+                "type": "url",
+                "id": "button_link",
+                "label": "Heading Button Link"
+            }
+        ],
+        "presets": [
+            {
+                "category": "Hero",
+                "name":"Simple Hero"
+            }
+        ]
 }
 {% endschema %}
