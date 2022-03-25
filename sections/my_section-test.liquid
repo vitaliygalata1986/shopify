@@ -1,0 +1,125 @@
+<section class="about-us">
+    <div class="container py-5">
+        <p>{{ section.settings.slider_interval }}</p>
+        <div class="row">
+            <div class="col-lg-12 col-md-8 mx-auto">
+                <h1>{{ section.settings.title }}</h1>
+                {{ section.settings.description }}
+                <a href="{{ section.settings.button_link }}" class="btn btn-secondary mb-3">{{ section.settings.button_label }}</a>
+                {% if section.settings.show_image%}
+                    {% if section.settings.image != blanck %}
+                        <img class="d-block" src="{{ section.settings.image | image_url: width: 420, height:420 }}" alt="{{ section.settings.image.alt }}">
+                    {% else %}
+                        {% capture current %} {% cycle 1,2 %}{% endcapture %}
+                        {{ 'lifestyle-1' | placeholder_svg_tag }}
+                    {% endif %}
+                {% endif %}
+
+            </div>
+            <div class="col-lg-12 col-md-8 mx-auto mt-5">
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        {% for block in section.blocks %}
+                            <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="{{ forloop.index0}}" class="{% if forloop.first %}active{% endif %}" aria-current="true" aria-label="Slide {{ forloop.index }}"></button>
+                        {% endfor %}
+                    </div>
+                    <div class="carousel-inner">
+                        {% for block in section.blocks %}
+                            <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                                <img src="{{ block.settings.image | image_url: width: 420, height:420 }} " class="d-block w-100" alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>{{ block.settings.title}}</h5>
+                                    <p>{{ block.settings.description}}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% schema %}
+{
+    "name": "Section Test About Us",
+    "class": "my-section",
+    "settings":[
+        {
+            "type": "text",
+            "id": "title",
+            "default": "Heading",
+            "label": "Title"
+        },
+        {
+            "type": "richtext",
+            "id": "description",
+            "default": "<p>Example Paragraph</p>",
+            "label": "Heading Description"
+        },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Heading Background Title"
+        },
+        {
+            "type": "text",
+            "id": "button_label",
+            "default": "Button",
+            "label": "Heading Button Label"
+        },
+        {
+            "type": "url",
+            "id": "button_link",
+            "label": "Heading Button Link"
+        },
+        {
+            "type": "checkbox",
+            "id": "show_image",
+            "label": "Show images",
+            "default": true
+        }
+    ],
+    "blocks": [
+        {
+            "name": "Slide",
+            "type": "slide",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "default": "Heading",
+                    "label": "Title"
+                },
+                {
+                    "type": "richtext",
+                    "id": "description",
+                    "default": "<p>Example Paragraph</p>",
+                    "label": "Heading Description"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "category": "About Us",
+            "name": "About Us"
+        }
+    ]
+}
+{% endschema %}
+
